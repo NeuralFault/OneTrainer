@@ -1,11 +1,18 @@
 # Note: AMD requirements might be outdated. If you can provide information about running OneTrainer on AMD,
 # please open an issue or pull request on github
 
-# pytorch
---extra-index-url https://download.pytorch.org/whl/rocm6.3
-torch==2.9.1+rocm6.3
-torchvision==0.24.1+rocm6.3
-onnxruntime==1.23.2
+# ── Linux ROCm ────────────────────────────────────────────────────────────────
+# pytorch (Linux only — install-rocm.bat handles Windows ROCm torch installs)
+--extra-index-url https://download.pytorch.org/whl/rocm7.2
+torch==2.12.0+rocm7.2; sys_platform == "linux"
+torchvision==0.27.0+rocm7.2; sys_platform == "linux"
+# onnxruntime pinned for Linux ROCm only; Windows ROCm uses the unpinned default
+onnxruntime==1.23.2; sys_platform == "linux"
+
+# ── Windows ROCm ──────────────────────────────────────────────────────────────
+# Use install-rocm.bat / update-rocm.bat which detect your AMD GPU architecture
+# and install torch/torchvision/torchaudio from https://repo.amd.com/rocm/whl-multi-arch/
+# See requirements-rocm-windows.txt for the full Windows ROCm dependency list.
 
 # optimizers
 # TODO

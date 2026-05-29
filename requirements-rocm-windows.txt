@@ -1,0 +1,17 @@
+# Windows ROCm requirements
+# NOTE: torch, torchvision, and torchaudio are installed dynamically by
+#       install-rocm.bat / update-rocm.bat using the detected AMD GPU GFX arch.
+#       e.g.:  pip install "torch[device-gfx1100]" "torchvision[gfx1100]" torchaudio \
+#                  --index-url https://repo.amd.com/rocm/whl-multi-arch/
+#
+#
+# NOTE: ROCm/MIGraphX execution is Linux-only; on Windows this falls back to CPU.
+onnxruntime
+
+# triton
+triton-windows
+
+# bitsandbytes ROCm Windows build (Python 3.12 only) is installed directly by the
+# bat scripts from: https://github.com/0xDELUXA/bitsandbytes_win_rocm
+
+-r requirements-global.txt
