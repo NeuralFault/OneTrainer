@@ -37,12 +37,15 @@ OneTrainer is a one-stop solution for all your Diffusion training needs.
 > Installing OneTrainer requires Python >=3.10 and <3.14.
 > You can download Python at https://www.python.org/downloads/windows/.
 > Then follow the below steps.
+>
+> **Windows (AMD/ROCm)**: Python **3.11–3.14** is supported. Python **3.12** is recommended for full compatibility (required for the ROCm bitsandbytes build).
 
 #### Automatic installation
 
 1. Clone the repository `git clone https://github.com/Nerogar/OneTrainer.git`
 2. Run:
-    - Windows: Double click or execute `install.bat`
+    - Windows (Nvidia): Double click or execute `install.bat`
+    - Windows (AMD/ROCm): Double click or execute `install-rocm.bat`
     - Linux and Mac: Execute `install.sh`
 
 #### Manual installation
@@ -53,7 +56,34 @@ OneTrainer is a one-stop solution for all your Diffusion training needs.
 4. Activate the new venv:
     - Windows: `venv\scripts\activate`
     - Linux and Mac: Depends on your shell, activate the venv accordingly
-5. Install the requirements `pip install -r requirements.txt`
+5. Install the requirements:
+    - Windows (Nvidia) and Linux/Mac: `pip install -r requirements.txt`
+    - Windows (AMD/ROCm): See the steps below
+
+<details>
+<summary><b>Windows (AMD/ROCm) — manual install steps</b></summary>
+
+> **Supported hardware:** RDNA 1 (RX 5000), RDNA 2 (RX 6000), RDNA 3 (RX 7000 + Ryzen 8000 iGPU), RDNA 3.5 (Ryzen AI), and RDNA 4 (RX 9000) only.
+> Vega/GCN, Ryzen iGPUs older than Ryzen 8000 series (RDNA 2 and below) and Ryzen 9000 are not supported.
+
+You will need your GPU's ROCm GFX architecture string (e.g. `gfx1100`).
+If you don't know yours, look up your GPU in the **Device / Install Extras** table here:
+[ROCm supported devices and install extras](https://github.com/ROCm/TheRock/blob/main/RELEASES.md#supported-python-device--install-extras)
+
+Once you have your GFX-arch string, run the following inside your activated venv (replace `gfx####` with your actual arch):
+
+```
+pip install --upgrade pip
+pip install "torch[device-gfx####]" "torchvision[device-gfx####]" torchaudio --index-url https://repo.amd.com/rocm/whl-multi-arch/
+pip install -r requirements-rocm-windows.txt
+```
+
+**bitsandbytes** (8-bit optimizers and NF4/weight quantization) — Python 3.12 only:
+```
+pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3-rocm7-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl
+```
+If you are not using Python 3.12, skip this step — 8-bit optimizers and weight quantization will be unavailable.
+</details>
 
 > [!Tip]
 > Some Linux distributions are missing required packages for instance: On Ubuntu you must install `libGL`:
@@ -69,14 +99,18 @@ OneTrainer is a one-stop solution for all your Diffusion training needs.
 
 #### Automatic update
 
--   Run `update.bat` or `update.sh`
+-   Windows (Nvidia): Run `update.bat`
+-   Windows (AMD/ROCm): Run `update-rocm.bat`
+-   Linux and Mac: Run `update.sh`
 
 #### Manual update
 
 1. Cd to folder containing the repo `cd OneTrainer`
 2. Pull changes `git pull`
 3. Activate the venv `venv/scripts/activate`
-4. Re-install all requirements `pip install -r requirements.txt --force-reinstall`
+4. Re-install all requirements:
+    - Windows (Nvidia) and Linux/Mac: `pip install -r requirements.txt --force-reinstall`
+    - Windows (AMD/ROCm): `pip install -r requirements-rocm-windows.txt --force-reinstall`
 
 ## Usage
 
@@ -89,6 +123,7 @@ For a technically focused quick start, see the [Quick Start Guide](docs/QuickSta
 #### Windows
 
 -   To start the UI, navigate to the OneTrainer folder and double-click `start-ui.bat`
+        or `start-ui-rocm.bat` (AMD)
 
 #### Unix-based systems
 
@@ -119,7 +154,7 @@ If you are on Mac or Linux, you can also read [the launch script documentation](
 
 For general troubleshooting or questions, ask in [Discussions](https://github.com/Nerogar/OneTrainer/discussions), check the [Wiki](https://github.com/Nerogar/OneTrainer/wiki) or join our [Discord](https://discord.gg/KwgcQd5scF).
 
-If you encounter a reproducible error you first must run update.bat or update.sh and confirm the issue is still able to be reproduced. Then export anonymized debug information to help us solve an issue you are facing and upload it as part of your Github Issues submission.
+If you encounter a reproducible error you first must run update.bat or update-rocm.bat (AMD) or update.sh and confirm the issue is still able to be reproduced. Then export anonymized debug information to help us solve an issue you are facing and upload it as part of your Github Issues submission.
 
 -   On Windows double click `export_debug.bat`
 -   On Unix-based systems execute `./run-cmd.sh generate_debug_report`
