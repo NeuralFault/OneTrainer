@@ -13,7 +13,7 @@ set "VENV_DIR=%SCRIPT_DIR%\venv"
 set "VERSION_FILE=%SCRIPT_DIR%\scripts\util\version_check.py"
 set "GFX_DETECT=%SCRIPT_DIR%\scripts\util\detect_amd_gfx.py"
 set "ROCM_INDEX_URL=https://repo.amd.com/rocm/whl-multi-arch/"
-set "BNB_WHEEL_URL=https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3.12-rocm7.15-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl:
+set "BNB_WHEEL_URL=https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3.12-rocm7.15-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl"
 set "MIN_PY=3.11" & set "MAX_PY=3.14"
 
 goto :main
