@@ -12,8 +12,8 @@ set "GFX_DETECT=%SCRIPT_DIR%\scripts\util\detect_amd_gfx.py"
 set "ROCM_INDEX_URL=https://repo.amd.com/rocm/whl-multi-arch/"
 
 REM Verify that OneTrainer is our current working directory
-if not exist "scripts\train_ui.py" (
-    echo Error: train_ui.py does not exist, you have done something very wrong. Reclone the repository.
+if not exist "scripts\train_ui_ctk.py" (
+    echo Error: train_ui_ctk.py does not exist, you have done something very wrong. Reclone the repository.
     goto :end_error
 )
 
@@ -219,7 +219,7 @@ if errorlevel 1 (
 echo.
 echo %CYAN%Updating ROCm PyTorch for %GFX_ARCH% from AMD wheel index...%RESET%
 echo Executing: pip install "torch[device-%GFX_ARCH%]" "torchvision[device-%GFX_ARCH%]" torchaudio --index-url %ROCM_INDEX_URL%
-"%PYTHON%" -m pip install --upgrade --upgrade-strategy eager "torch[device-%GFX_ARCH%]" "torchvision[device-%GFX_ARCH%]" torchaudio --index-url %ROCM_INDEX_URL%
+"%PYTHON%" -m pip install --upgrade --upgrade-strategy eager "torch[device-%GFX_ARCH%]" "torchvision[device-%GFX_ARCH%]" torchaudio --index-url %ROCM_INDEX_URL% --force-reinstall
 if errorlevel 1 (
     echo Error: ROCm PyTorch update failed.
     goto :end_error
@@ -242,7 +242,7 @@ set "PY_MINOR="
 for /f "tokens=2 delims=." %%M in ("!PY_VER!") do set "PY_MINOR=%%M"
 if "!PY_MINOR!"=="12" (
     echo %CYAN%Updating ROCm bitsandbytes wheel ^(Python 3.12^)...%RESET%
-    "%PYTHON%" -m pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3-rocm7-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl
+    "%PYTHON%" -m pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3.12-rocm7.15-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl
     if errorlevel 1 (
         echo Error: bitsandbytes ROCm update failed.
         goto :end_error
