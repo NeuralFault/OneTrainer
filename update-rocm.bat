@@ -242,7 +242,7 @@ set "PY_MINOR="
 for /f "tokens=2 delims=." %%M in ("!PY_VER!") do set "PY_MINOR=%%M"
 if "!PY_MINOR!"=="12" (
     echo %CYAN%Updating ROCm bitsandbytes wheel ^(Python 3.12^)...%RESET%
-    "%PYTHON%" -m pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3.12-rocm7.15-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl
+    "%PYTHON%" -m pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.49.1-py3.12-rocm7.16-win_amd64_all/bitsandbytes-0.49.1-cp312-cp312-win_amd64.whl
     if errorlevel 1 (
         echo Error: bitsandbytes ROCm update failed.
         goto :end_error
