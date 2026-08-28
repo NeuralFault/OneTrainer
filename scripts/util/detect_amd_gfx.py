@@ -122,7 +122,7 @@ def get_gfx_arch(name: str) -> str | None:
         return "gfx1101"
 
     # ── RDNA 3 dGPU Navi31 (incl. Pro) ───────────────────────────────────────
-    if has("W7800") or has("7900") or has("7950") or has("7990"):
+    if has("W7800") or has("7900"):
         return "gfx1100"
 
     # ── RDNA 2 APUs (Rembrandt) ───────────────────────────────────────────────
