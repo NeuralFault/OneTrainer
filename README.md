@@ -80,7 +80,7 @@ pip install -r requirements-rocm-windows.txt
 
 **bitsandbytes** (8-bit optimizers and NF4/weight quantization) — Python 3.12 only:
 ```
-pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.50.0.dev0-py3-rocm7-win_amd64_all/bitsandbytes-0.50.0.dev0-cp312-cp312-win_amd64.whl
+pip install https://github.com/0xDELUXA/bitsandbytes_win_rocm/releases/download/0.49.1-py3.12-rocm7.16-win_amd64_all/bitsandbytes-0.49.1-cp312-cp312-win_amd64.whl
 ```
 If you are not using Python 3.12, skip this step — 8-bit optimizers and weight quantization will be unavailable.
 </details>
